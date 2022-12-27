@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { getInfo } = require('./sheets.js');
 const config = require('./config.js');
+// const path = require('path');
+
 const app = express();
 const port = 5000;
 
@@ -11,6 +13,11 @@ app.use(cors());
 // app.use(express.static(path.join(__dirname, '/../frontend')));
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, '/../frontend/index.html'));
+// });
+
+// app.use((err, req, res, next) => {
+//   const status = err.name && err.name === 'ValidationError' ? 400 : 500;
+//   res.status(status).send({ message: err.message });
 // });
 
 const paginatedResults = (model) => {
