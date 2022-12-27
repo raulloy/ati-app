@@ -1,3 +1,7 @@
 node_modules
 .env
 credentials.json
+package-lock.json
+
+frontend/package-lock.json
+frontend/main.js
