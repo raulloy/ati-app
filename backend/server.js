@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { getInfo } = require('./sheets.js');
+const config = require('./config.js');
 const app = express();
 const port = 5000;
 
@@ -8,9 +9,9 @@ app.use(cors());
 
 // app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 // app.use(express.static(path.join(__dirname, '/../frontend')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../frontend/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../frontend/index.html'));
+// });
 
 const paginatedResults = (model) => {
   return (req, res, next) => {
@@ -144,6 +145,6 @@ detailInfo();
 detailPerfiles();
 perfiles();
 
-app.listen(port, () => {
+app.listen(config.PORT, () => {
   console.log(`App listening on port ${port}`);
 });
