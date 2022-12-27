@@ -7,7 +7,7 @@
     "start": "node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && babel backend -d dist && npm install && cd frontend && npm install && npm run build",
-    "serve": "node backend/server.js"
+    "serve": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
