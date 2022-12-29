@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { getInfo } = require('./sheets.js');
 const config = require('./config.js');
-const path = require('path');
+// const path = require('path');
 
 const app = express();
 const port = 5000;
@@ -108,20 +108,6 @@ const detailPerfiles = async () => {
   });
 };
 
-// const perfiles = async () => {
-//   const detailPerfil = (await getInfo).perfilesInfo;
-
-//   app.get('/api/perfiles/:id', (req, res) => {
-//     const perfil = detailPerfil.filter(
-//       (element) => element.Codigo == req.params.id
-//     );
-//     if (perfil) {
-//       res.send(perfil);
-//     } else {
-//       res.status(404).send({ message: 'Product not found!' });
-//     }
-//   });
-// };
 const perfiles = async () => {
   const detailPerfil = (await getInfo).perfilesInfo;
 
@@ -141,11 +127,11 @@ detailInfo();
 detailPerfiles();
 perfiles();
 
-app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
-app.use(express.static(path.join(__dirname, '/../frontend')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../frontend/index.html'));
-});
+// app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
+// app.use(express.static(path.join(__dirname, '/../frontend')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../frontend/index.html'));
+// });
 
 app.listen(config.PORT, () => {
   console.log(`App listening on port ${port}`);
