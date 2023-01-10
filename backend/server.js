@@ -120,12 +120,28 @@ const perfiles = async () => {
   });
 };
 
+const detailHuecos = async () => {
+  const detailHueco = (await getInfo).huecosInfo;
+
+  app.get('/api/detail-huecos/:id', (req, res) => {
+    const hueco = detailHueco.filter(
+      (element) => element.Producto == req.params.id
+    );
+    if (hueco) {
+      res.send(hueco);
+    } else {
+      res.status(404).send({ message: 'Product not found!' });
+    }
+  });
+};
+
 productsInfo();
 quotationsInfo();
 detailProducts();
 detailInfo();
 detailPerfiles();
 perfiles();
+detailHuecos();
 
 // app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 // app.use(express.static(path.join(__dirname, '/../frontend')));
