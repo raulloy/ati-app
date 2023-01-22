@@ -144,6 +144,62 @@ const getInfo = async () => {
     })
   );
 
+  const accesoriosSheet = doc.sheetsByTitle['Accesorios'];
+  const accesoriosInfo = await accesoriosSheet.getRows();
+  const accesoriosRows = accesoriosInfo.map((element) => element._rawData);
+
+  const accesoriosObj = accesoriosRows.map((element) =>
+    element.reduce((acc, v, index) => ({ ...acc, [index]: v }), {})
+  );
+
+  const accesorios = accesoriosObj.map(
+    ({ 0: Cod, 1: Nombre, 2: Proveedor, 3: Familia, 4: Serie }) => ({
+      Cod,
+      Nombre,
+      Proveedor,
+      Familia,
+      Serie,
+    })
+  );
+
+  const selladoresDetailSheet = doc.sheetsByTitle['Detalle Selladores'];
+  const selladoresDetailInfo = await selladoresDetailSheet.getRows();
+  const selladoresDetailRows = selladoresDetailInfo.map(
+    (element) => element._rawData
+  );
+
+  const selladoresdetailObj = selladoresDetailRows.map((element) =>
+    element.reduce((acc, v, index) => ({ ...acc, [index]: v }), {})
+  );
+
+  const selladoresDetail = selladoresdetailObj.map(
+    ({ 1: Producto, 2: Sellador, 3: Formula, 4: Area }) => ({
+      Producto,
+      Sellador,
+      Formula,
+      Area,
+    })
+  );
+
+  const herrajesDetailSheet = doc.sheetsByTitle['Detalle Herrajes'];
+  const herrajesDetailInfo = await herrajesDetailSheet.getRows();
+  const herrajesDetailRows = herrajesDetailInfo.map(
+    (element) => element._rawData
+  );
+
+  const herrajesdetailObj = herrajesDetailRows.map((element) =>
+    element.reduce((acc, v, index) => ({ ...acc, [index]: v }), {})
+  );
+
+  const herrajesDetail = herrajesdetailObj.map(
+    ({ 1: Producto, 2: Herraje, 3: Cantidad, 4: Area }) => ({
+      Producto,
+      Herraje,
+      Cantidad,
+      Area,
+    })
+  );
+
   return {
     productsInfo: products,
     quotationsInfo: quotations,
@@ -151,6 +207,9 @@ const getInfo = async () => {
     perfilesDetailInfo: perfilesDetail,
     perfilesInfo: perfiles,
     huecosInfo: huecosDetail,
+    accesoriosInfo: accesorios,
+    selladoresDetailInfo: selladoresDetail,
+    herrajesDetailInfo: herrajesDetail,
   };
 };
 

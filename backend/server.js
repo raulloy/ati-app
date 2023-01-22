@@ -135,6 +135,49 @@ const detailHuecos = async () => {
   });
 };
 
+const accesorios = async () => {
+  const detailAccesorios = (await getInfo).accesoriosInfo;
+
+  app.get('/api/accesorios', (req, res) => {
+    if (detailAccesorios) {
+      res.send(detailAccesorios);
+    } else {
+      res.status(404).send({ message: 'Product not found!' });
+    }
+  });
+};
+
+const selladoresdetailAccesorios = async () => {
+  const detailAccesorio = (await getInfo).selladoresDetailInfo;
+
+  app.get('/api/detail-accesorios/selladores/:id', (req, res) => {
+    const accesorio = detailAccesorio.filter(
+      (element) => element.Producto == req.params.id
+    );
+    if (accesorio) {
+      res.send(accesorio);
+    } else {
+      res.status(404).send({ message: 'Product not found!' });
+    }
+  });
+};
+
+const herrajesdetailAccesorios = async () => {
+  const detailAccesorio = (await getInfo).herrajesDetailInfo;
+
+  app.get('/api/detail-accesorios/herrajes/:id', (req, res) => {
+    const accesorio = detailAccesorio.filter(
+      (element) =>
+        element.Producto == req.params.id && element.Area == 'Producción'
+    );
+    if (accesorio) {
+      res.send(accesorio);
+    } else {
+      res.status(404).send({ message: 'Product not found!' });
+    }
+  });
+};
+
 productsInfo();
 quotationsInfo();
 detailProducts();
@@ -142,6 +185,9 @@ detailInfo();
 detailPerfiles();
 perfiles();
 detailHuecos();
+accesorios();
+selladoresdetailAccesorios();
+herrajesdetailAccesorios();
 
 // app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 // app.use(express.static(path.join(__dirname, '/../frontend')));
